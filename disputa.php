@@ -1,12 +1,12 @@
 ﻿<?php require_once "validador_acesso.php";
 
+require("conectar_banco_de_dados.php");
 
 function removerJogador($vetor, $valor){
 
   $chave = array_search($valor, $vetor);
 
   if($vetor!==false){
-      echo "<br>chaves: " . $chave . "<br>";
 
       unset($vetor[$chave]);
   }else {
@@ -15,17 +15,11 @@ function removerJogador($vetor, $valor){
   return $vetor;
 }
 
-
 $jogadores_primeiro_time = array();
 $jogadores_segundo_time = array();
 
 $jogadores_primeiro_time = json_decode($_COOKIE["listaNomes"], true);
 $jogadores_segundo_time = json_decode($_COOKIE["listaNomes2"], true);
-//$jogadores_primeiro_time = json_decode($_COOKIE["jogadores_primeiro_time"], true);
-//$jogadores_segundo_time = json_decode($_COOKIE["jogadores_segundo_time"], true);
-
-//$jogadores_primeiro_time = explode(",", $_COOKIE["jogadores_primeiro_time"]);
-//$jogadores_segundo_time = explode(",", $_COOKIE["jogadores_segundo_time"]);
 
 $dados_clube = json_decode($_COOKIE["dados_clube"],true);
 $dados_clube2 = json_decode($_COOKIE["dados_clube2"],true);
@@ -74,32 +68,15 @@ if( isset($_GET["jogador1"]) && isset($_GET["jogador2"]) && isset($_GET["poder1"
 
   }
 
-  echo "<br>";
-  echo "jogador_primeiro_time: " . $jogador_primeiro_time;
-  echo "<br>";
-  echo "<br>";
   $jogadores_primeiro_time = removerJogador($jogadores_primeiro_time, $jogador_primeiro_time);
   $jogadores_segundo_time = removerJogador($jogadores_segundo_time, $jogador_segundo_time);
 
-  echo "<br>";
-  echo "jogador_primeiro_time: " . $jogador_primeiro_time;
-  echo "<br>";
-  echo "jogador_segundo_time: " . $jogador_segundo_time;
-  echo "<br>";
-  echo "<br>";
-  echo "<br>";
-  print_r($jogadores_primeiro_time);
-  echo "<br>";
-  echo "<br>";
   $jogadores_primeiro_time = array_values($jogadores_primeiro_time);
   $jogadores_segundo_time = array_values($jogadores_segundo_time);
-  echo "<br>";
-  echo "<br>";
-  print_r($jogadores_primeiro_time);
-  echo "<br>";
-  echo "<br>";
+
   setcookie("listaNomes", json_encode($jogadores_primeiro_time));
   setcookie("listaNomes2", json_encode($jogadores_segundo_time));
+
   setcookie("pontos_time1", $pontos_time1);
   setcookie("pontos_time2", $pontos_time2);
 
@@ -111,9 +88,6 @@ if( isset($_GET["jogador1"]) && isset($_GET["jogador2"]) && isset($_GET["poder1"
     setcookie("escudo1", $dados_clube['escudo']);
     setcookie("escudo2", $dados_clube2['escudo']);
 
-
-    require("conectar_banco_de_dados.php");
-
     $sql = "UPDATE clube SET desafiado='" . $dados_clube['nome'] . "' WHERE nome_clube='" . $dados_clube2['nome'] . "'";
     if (mysqli_query($conn, $sql)) {
           echo "New record created successfully";
@@ -122,9 +96,8 @@ if( isset($_GET["jogador1"]) && isset($_GET["jogador2"]) && isset($_GET["poder1"
     }
     mysqli_close($conn);
 
-
-
     header("Location: resultado.php");
+    die();
   }
 }
 

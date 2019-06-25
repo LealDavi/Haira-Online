@@ -3,9 +3,8 @@
     $listaClubes = json_decode($_COOKIE["listaClubes"], true);
     $clube_do_usuario = $_SESSION["clube_do_usuario"];
 
-
     $listaClubes = json_decode($_COOKIE["listaClubes"], true);
-    print_r($listaClubes);
+
 ?>
 <html>
   <head>
@@ -67,7 +66,7 @@
                         echo "<a class='btn btn-primary' href='carregar_time_adversario.php?adversario=" . $clube_atual . " '>" . $clube_atual . "</a>";
                       }
                     }
-                    if ( $desafiado != "0" ) {
+                    if ( $desafiado ) {
                       echo "Você foi desafiado por " . $desafiado;
                     }
                 ?>

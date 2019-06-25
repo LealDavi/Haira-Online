@@ -102,6 +102,7 @@ for ( $i = 0 ; $i < 4 ; $i++ ) {
 
 }
 
+header("Location: home.php");
 
 setcookie("dados_clube", json_encode($dados_clube));
 
@@ -114,6 +115,5 @@ setcookie("listaJogadores", json_encode($listaJogadores));
 setcookie("listaClubes", json_encode($listaClubes));
 
 mysqli_close($conn);
-header("Location: home.php");
 
 ?>

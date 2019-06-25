@@ -1,6 +1,5 @@
 <?php require_once "validador_acesso.php";
   
-  
   $listaJogadores = json_decode($_COOKIE["listaJogadores"], true);
   $listaClubes = json_decode($_COOKIE["listaClubes"], true);
 

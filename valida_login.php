@@ -33,11 +33,12 @@
 		$_SESSION["clube_do_usuario"] = $clube_do_usuario;
 
 		header("Location: requisicao.php");
+		die();
 	}else {
 
 		$_SESSION["autenticado"] = "NAO";
 		header("Location: login.php?login=erro");
-
+		die();
 	}
 
  ?>
