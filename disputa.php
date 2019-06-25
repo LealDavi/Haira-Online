@@ -74,12 +74,6 @@ if( isset($_GET["jogador1"]) && isset($_GET["jogador2"]) && isset($_GET["poder1"
   $jogadores_primeiro_time = array_values($jogadores_primeiro_time);
   $jogadores_segundo_time = array_values($jogadores_segundo_time);
 
-  setcookie("listaNomes", json_encode($jogadores_primeiro_time));
-  setcookie("listaNomes2", json_encode($jogadores_segundo_time));
-
-  setcookie("pontos_time1", $pontos_time1);
-  setcookie("pontos_time2", $pontos_time2);
-
   if(count($jogadores_primeiro_time) == 0) {
 
     setcookie("clube1", $dados_clube['nome']);
@@ -99,6 +93,13 @@ if( isset($_GET["jogador1"]) && isset($_GET["jogador2"]) && isset($_GET["poder1"
     header("Location: resultado.php");
     die();
   }
+  
+  setcookie("listaNomes", json_encode($jogadores_primeiro_time));
+  setcookie("listaNomes2", json_encode($jogadores_segundo_time));
+
+  setcookie("pontos_time1", $pontos_time1);
+  setcookie("pontos_time2", $pontos_time2);
+
 }
 
 ?>
